@@ -1,0 +1,656 @@
+/* Google Fonts – Inter & DM Sans */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&family=Inter:wght@400;700;800&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #f5efe6;
+  font-family: 'Inter', sans-serif;
+}
+
+/* MAIN HERO LAYOUT */
+.hero {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CENTER SILHOUETTE - ABSOLUTE & CONSTRAINED */
+.hero-image-wrapper {
+  position: absolute;
+  inset: 0; /* Full screen so the image isn't cut */
+  z-index: 1;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  
+  /* PROTECTIVE GRADIENT MASK ON THE WRAPPER */
+  /* Left edge protects Leonardo, right edge protects Rosario */
+  --mask-stop-1: 25%;
+  --mask-stop-2: 35%;
+  --mask-stop-3: 65%;
+  --mask-stop-4: 75%;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent var(--mask-stop-1), black var(--mask-stop-2), black var(--mask-stop-3), transparent var(--mask-stop-4), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, transparent var(--mask-stop-1), black var(--mask-stop-2), black var(--mask-stop-3), transparent var(--mask-stop-4), transparent 100%);
+  
+  will-change: mask-image, -webkit-mask-image;
+}
+
+.hero-image-wrapper img {
+  width: auto;
+  height: 100vh;
+  object-fit: contain; /* Restored so baton and violin are not cut! */
+  object-position: bottom center;
+  display: block;
+  margin-left: 6vw; /* Visually shifts the asymmetrical PNG body to the right */
+
+  /* INITIAL ANIMATION STATES IN CSS */
+  transform-origin: top center;
+  transform: scale(3);
+  will-change: transform;
+}
+
+/* FOREGROUND CONTENT */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100vh;
+  padding: 0 40px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+}
+
+.hero-left,
+.hero-right {
+  display: flex;
+  flex-direction: column;
+  pointer-events: auto;
+}
+
+.hero-left {
+  align-items: flex-start;
+}
+
+.hero-right {
+  align-items: flex-end;
+}
+
+/* NAME STYLE */
+.name {
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  font-size: clamp(40px, 5.5vw, 120px); /* Slightly smaller to give the silhouette breathing room */
+  line-height: 0.85;
+  margin: 0;
+  white-space: nowrap;
+  color: #1a1a1a;
+  
+  opacity: 0;
+  transform: translateY(24px);
+  will-change: opacity, transform;
+}
+
+/* SUBTITLES */
+.subtitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 1rem;
+  margin-top: 1rem;
+  opacity: 0;
+  transform: none;
+}
+
+.subtitle .line {
+  flex: 1;
+  height: 1px;
+  background: #1a1a1a;
+  opacity: 0.4;
+}
+
+.subtitle .text {
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* SCROLL PROMPT */
+.scroll-prompt {
+  position: absolute;
+  bottom: 40px;
+  left: 40px; /* Moved to the bottom-left corner to avoid silhouette */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 100;
+}
+
+.mouse-icon {
+  width: 20px;
+  height: 32px;
+  border: 2px solid #1a1a1a;
+  border-radius: 12px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.mouse-icon .wheel {
+  width: 4px;
+  height: 6px;
+  background-color: #1a1a1a;
+  border-radius: 2px;
+  margin-top: 6px;
+  animation: scroll-wheel 1.5s cubic-bezier(0.15, 0.41, 0.69, 0.94) infinite;
+}
+
+@keyframes scroll-wheel {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(12px); opacity: 0; }
+}
+
+.scroll-prompt .scroll-text {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #1a1a1a;
+}
+
+/* SCROLL SPACER */
+.scroll-spacer {
+  height: 200vh;
+  pointer-events: none;
+}
+
+/* ---------------- NEW BIO STACKING CARDS ---------------- */
+.new-bio-section {
+  position: relative;
+  width: 100%;
+}
+
+.pinned-area {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  z-index: 10;
+}
+
+/* Background Watermark */
+.background-text {
+  position: absolute;
+  bottom: 4vh;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(6rem, 14vw, 12rem);
+  font-weight: 700;
+  line-height: 0.8;
+  color: #1a1a1a;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 0;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+/* The Stacked Column container that shifts UP as cards drop */
+.cards-column {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(48%, 480px);
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+}
+
+.card-wrapper {
+  margin-top: -22px;
+  position: relative;
+  width: 100%;
+}
+
+.card-wrapper:first-child {
+  margin-top: 0;
+}
+
+/* Premium Glassmorphism Card Element */
+.card {
+  font-family: 'DM Sans', sans-serif;
+  background: rgba(255, 252, 248, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 16px;
+  padding: 32px 32px 40px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow:
+    0 18px 38px rgba(0, 0, 0, 0.05),
+    0 6px 14px rgba(0, 0, 0, 0.03),
+    inset 0 0 20px rgba(255, 255, 255, 0.4);
+  transform-origin: center top;
+  will-change: transform, opacity, visibility;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.card p {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.7;
+  color: #3d3935;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* Scroll Triggers */
+.scroll-triggers {
+  position: relative;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.scroll-spacer-bio {
+  height: 80vh;
+  width: 100%;
+}
+
+.step-trigger {
+  height: 100vh;
+  width: 100%;
+}
+
+.scroll-end-spacer {
+  height: 100vh;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .background-text { font-size: 16vw; }
+  .card { padding: 35px 35px 55px 35px; }
+  .card-wrapper { margin-top: -30px; }
+}
+
+
+/* ---------------- NEW GALLERY STYLES ---------------- */
+/* ============================================================
+   GALLERY.CSS — Vertical Carousel Edition
+   ============================================================ */
+
+:root {
+  --card-w: 360px;
+  --card-h: 160px;
+
+  --bg-deep: #080808;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255,255,255,0.55);
+
+  --t-fast: 0.25s ease;
+  --t-mid: 0.45s ease;
+}
+
+/* THEATRE MODE BACKGROUNDS */
+.bg-vignette {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 55% 65% at 20% 55%, transparent 30%, rgba(0,0,0,0.82) 100%),
+    radial-gradient(ellipse 55% 65% at 80% 55%, transparent 30%, rgba(0,0,0,0.82) 100%),
+    radial-gradient(ellipse 100% 50% at 50% 100%, rgba(0,0,0,0.95) 0%, transparent 60%),
+    radial-gradient(ellipse 100% 30% at 50% 0%,  rgba(0,0,0,0.90) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 9997; /* Below Modal */
+  opacity: 0; /* Handled by GSAP */
+}
+
+.bg-grain {
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.07'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9998; /* Below Modal */
+  opacity: 0; /* Handled by GSAP */
+}
+
+/* STAGE */
+.gallery-stage {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* TITLE */
+.stage-header {
+  padding-top: 32px;
+  z-index: 10;
+}
+.stage-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.6rem, 3vw, 2.6rem);
+  letter-spacing: 0.35em;
+  color: var(--text-primary);
+  text-transform: uppercase;
+}
+
+/* PERFORMERS */
+.performers {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  position: relative;
+}
+
+/* PANELS */
+.performer-panel {
+  flex: 1 1 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  transition: flex-basis 0.6s ease;
+}
+
+/* EXPANSION */
+.performers:has(.performer-panel--left:hover) .performer-panel--left { flex-basis: 82%; }
+.performers:has(.performer-panel--left:hover) .performer-panel--right { flex-basis: 18%; }
+
+.performers:has(.performer-panel--right:hover) .performer-panel--right { flex-basis: 82%; }
+.performers:has(.performer-panel--right:hover) .performer-panel--left { flex-basis: 18%; }
+
+/* FIGURES */
+.performer-figure {
+  height: 72vh;
+  position: absolute;
+  bottom: 0;
+  z-index: 5;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+  transform-origin: bottom center;
+}
+.performer-figure img {
+  height: 100%;
+  mix-blend-mode: lighten;
+}
+
+/* Base positions */
+.performer-figure--violinist { left: 50%; transform: translateX(-40%); }
+.performer-figure--conductor { right: 50%; transform: translateX(40%); }
+
+/* SHRINK THE DIMMED SIDE */
+.performers:has(.performer-panel--left:hover) .performer-panel--right .performer-figure {
+  transform: translateX(40%) scale(0.82);
+  opacity: 0.55;
+}
+.performers:has(.performer-panel--right:hover) .performer-panel--left .performer-figure {
+  transform: translateX(-40%) scale(0.82);
+  opacity: 0.55;
+}
+
+/* LABELS */
+.panel-label {
+  position: absolute;
+  top: 6%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: white;
+  z-index: 20;
+}
+.performer-panel--left .panel-label { margin-left: 60px; }
+.performer-panel--right .panel-label { margin-left: -60px; }
+
+/* ============================================================
+   VERTICAL CAROUSEL
+   ============================================================ */
+
+.v-carousel {
+  position: absolute;
+  top: 50%;
+  width: var(--card-w);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  z-index: 30;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.v-carousel--left { left: 2%; transform: translate(-20px, -50%); }
+.v-carousel--right { right: 2%; transform: translate(20px, -50%); }
+
+.performer-panel:hover .v-carousel {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(0, -50%);
+}
+
+/* ARROWS */
+.v-arrow {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: white;
+  width: 40px;
+  height: 40px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background var(--t-fast);
+}
+.v-arrow:hover {
+  background: rgba(255,255,255,0.18);
+}
+
+/* TRACK */
+.v-track {
+  height: calc((var(--card-h) * 3) + 36px);
+  flex: 0 0 auto;
+  width: 100%;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-right: 6px;
+}
+
+/* Hide scrollbar */
+.v-track::-webkit-scrollbar { width: 0; }
+
+/* CARD */
+.v-card {
+  width: var(--card-w);
+  height: var(--card-h);
+  flex-shrink: 0;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  overflow: hidden;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+}
+.v-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.v-card p {
+  display: none;
+}
+
+/* ============================================================
+   PATCH — 2‑CARD VISIBLE CAROUSEL + BETTER READABILITY
+   ============================================================ */
+
+/* 1. Larger, more readable cards */
+:root {
+  --card-w: 360px;   /* wider for readability */
+  --card-h: 210px;   /* taller to preserve poster proportions */
+}
+
+/* 2. Show only 2 cards at a time */
+.v-track {
+  height: calc((var(--card-h) * 2) + 18px); /* 2 cards + gap */
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-right: 6px;
+  align-items: center;
+}
+
+/* 3. Ensure arrows stay visible and centered */
+.v-carousel {
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--card-w);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.v-arrow {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 4. Prevent bottom card clipping */
+.v-card {
+  width: var(--card-w);
+  height: var(--card-h);
+  flex-shrink: 0;
+}
+
+/* 5. Smooth cinematic figure shrink */
+.performer-figure {
+  transition: transform 1.2s cubic-bezier(0.25, 0.1, 0.25, 1),
+              opacity 1.2s ease;
+  transform-origin: center bottom;
+}
+/* ============================================================
+   PATCH — Fix bottom card clipping and arrow alignment
+   ============================================================ */
+
+/* 1. Adjust carousel height to account for arrows */
+.v-track {
+  height: calc((var(--card-h) * 2) + 60px); /* 2 cards + gaps + arrow space */
+  overflow-y: hidden; /* prevent clipping */
+  scroll-snap-type: y mandatory;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 0 6px;
+  align-items: center;
+}
+
+/* 2. Center arrows relative to visible cards */
+.v-carousel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between; /* evenly distribute arrows and cards */
+  height: calc((var(--card-h) * 2) + 120px); /* total visible area + breathing room */
+}
+
+/* 3. Smooth figure shrink transition */
+.performer-figure {
+  transition: transform 1.4s cubic-bezier(0.25, 0.1, 0.25, 1),
+              opacity 1.4s ease;
+  transform-origin: center bottom;
+}
+
+.video-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 9999;
+}
+
+.video-modal.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.video-modal-content {
+  position: relative;
+  width: 80vw;
+  height: 45vw;
+  max-width: 1200px;
+  max-height: 675px;
+  animation: fadeIn 0.4s ease;
+}
+
+#video-frame {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+
+.video-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  font-size: 2.5rem;
+  color: white;
+  cursor: pointer;
+  user-select: none;
+}
+
+@keyframes fadeIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+
+
+
+
+/* FADE TRIGGER */
+.cinematic-fade-trigger {
+  height: 60vh;
+  width: 100%;
+  pointer-events: none;
+}
+

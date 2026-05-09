@@ -3,20 +3,131 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Performance Gallery</title>
-  <link rel="stylesheet" href="gallery.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Raleway:wght@200;300;400&display=swap" rel="stylesheet" />
-  <style>
-    body { background-color: #080808; opacity: 0; transition: opacity 0.6s ease; }
-    body.ready { opacity: 1; }
-  </style>
-</head>
+  <title>Hero – Inter</title>
 
+  <link rel="stylesheet" href="styles.css" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+</head>
 <body>
 
-  <main class="gallery-stage">
+  <div class="hero">
+    <!-- Center Image Wrapper -->
+    <div class="hero-image-wrapper">
+      <img src="assets/silhouette.png" alt="Silhouette" />
+    </div>
+
+    <!-- Foreground Content -->
+    <div class="hero-content">
+      <div class="hero-left">
+        <h1 class="name">Leonardo</h1>
+        <div class="subtitle conductor">
+          <span class="line"></span>
+          <span class="text">Orchestra Director</span>
+          <span class="line"></span>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <h1 class="name">Rosario</h1>
+        <div class="subtitle violinist">
+          <span class="line"></span>
+          <span class="text">Violinist</span>
+          <span class="line"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll Prompt (Moved to bottom-left, z-index: 100) -->
+    <div class="scroll-prompt">
+      <div class="mouse-icon">
+        <div class="wheel"></div>
+      </div>
+      <span class="scroll-text">Scroll</span>
+    </div>
+  </div>
+  
+  <div class="scroll-spacer" aria-hidden="true"></div>
+
+  <!-- NEW BIO SECTION -->
+  <section class="new-bio-section">
+    <div class="pinned-area">
+      <div class="background-text">BIOGRAPHY</div>
+      <div class="cards-column">
+        
+        <!-- Card 1 -->
+        <div class="card-wrapper">
+          <div class="card" data-rot="1.5" data-x="-12">
+            <p>Dr. Leonardo Rosario is an accomplished violinist, conductor, and educator, currently serving as Director of the Symphony Orchestra and Assistant Professor of Strings at Lee University, where he teaches undergraduate and graduate students in violin, viola, and conducting.</p>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card-wrapper">
+          <div class="card" data-rot="-1.2" data-x="14">
+            <p>Leonardo began his violin studies with Sibila Schelin, later continuing with Cecilia Guida and Ayrton Pinto. He has participated in masterclasses with distinguished artists including Leon Spier and Lorenz Nasturica, and Gerardo Ribeiro.</p>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card-wrapper">
+          <div class="card" data-rot="0.8" data-x="-8">
+            <p>From 2003 to 2005, he was a member of the Youth Orchestra of the Americas (YOA), serving as principal second violin during its inaugural season and touring across nine countries in North, Central, and South America.</p>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="card-wrapper">
+          <div class="card" data-rot="-2.0" data-x="18">
+            <p>In 2008, Leonardo earned his Master’s degree with full scholarship at the Boston Conservatory, studying with Irina Muresanu. During this time, he appeared as soloist with the Conservatory Orchestra on two occasions, performing Brahms’s Violin Concerto and Beethoven’s Triple Concerto.</p>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="card-wrapper">
+          <div class="card" data-rot="1.1" data-x="-15">
+            <p>Upon returning to Brazil, Leonardo joined the Minas Gerais Philharmonic Orchestra (2008–2015), founded and managed the Camerata Pampulha Chamber Group. He later returned to the United States to complete his Doctor of Musical Arts at the University of North Carolina–Greensboro.</p>
+          </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="card-wrapper">
+          <div class="card" data-rot="-0.5" data-x="10">
+            <p>In 2020, Leonardo was appointed Assistant Professor of Music, Director of the Strings Area, and Director of Orchestras at Kansas Wesleyan University (KWU). Over five years, he expanded the orchestra program and frequently conducted for the Kansas Music Educators Association.</p>
+          </div>
+        </div>
+
+        <!-- Card 7 -->
+        <div class="card-wrapper">
+          <div class="card" data-rot="1.8" data-x="-10">
+            <p>Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Invisible Scroll Triggers -->
+    <div class="scroll-triggers">
+      <div class="scroll-spacer-bio"></div>
+      <div class="step-trigger"></div>
+      <div class="step-trigger"></div>
+      <div class="step-trigger"></div>
+      <div class="step-trigger"></div>
+      <div class="step-trigger"></div>
+      <div class="step-trigger"></div>
+      <div class="step-trigger"></div>
+      <div class="scroll-end-spacer"></div>
+    </div>
+  </section>
+
+  <!-- CINEMATIC FADE TRIGGER -->
+  <div class="cinematic-fade-trigger"></div>
+
+  <!-- GALLERY STAGE -->
+  <main class="gallery-stage" id="gallery-stage">
+
 
     <div class="bg-vignette"></div>
     <div class="bg-grain"></div>
@@ -39,7 +150,7 @@
 
           <div class="v-track">
 
-  <div class="v-card" data-video="https://www.youtube.com/embed/cql0Xdnmqes">
+  <div class="v-card" data-video="https://youtu.be/cql0Xdnmqes">
     <img src="assets/otono_porteno.png" alt="Otoño Porteño">
   </div>
 
@@ -159,40 +270,188 @@
 
     </section>
 
+  
   </main>
 
-<div id="video-modal" class="video-modal">
+  <!-- VIDEO MODAL -->
+  <div id="video-modal" class="video-modal">
+
   <div class="video-modal-content">
     <span class="video-close">&times;</span>
     <iframe id="video-frame" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  
   </div>
-</div>
 
-<script>
-  window.addEventListener("load", () => {
-    document.body.classList.add("ready");
-  });
-// Select all carousels
-  document.querySelectorAll('.v-carousel').forEach(carousel => {
-    const track = carousel.querySelector('.v-track');
-    const cardHeight = track.querySelector('.v-card').offsetHeight + 18; // card + gap
 
-    // Up arrow
-    const up = carousel.querySelector('.v-arrow--up');
-    up.addEventListener('click', () => {
-      track.scrollBy({ top: -cardHeight, behavior: 'smooth' });
-    });
+  <!-- GSAP / ScrollTrigger animation -->
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      gsap.registerPlugin(ScrollTrigger);
 
-    // Down arrow
-    const down = carousel.querySelector('.v-arrow--down');
-    down.addEventListener('click', () => {
-      track.scrollBy({ top: cardHeight, behavior: 'smooth' });
-    });
-  });
-</script>
+      const silhouette = document.querySelector('.hero-image-wrapper img');
 
-<script>
-// MODAL LOGIC WITH TIMESTAMP SUPPORT
+      // 1. HERO TIMELINE (Bound specifically to the scroll spacer)
+      const heroTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '.scroll-spacer',
+          start: 'top bottom', // Start exactly as spacer enters viewport
+          end: 'bottom bottom', // End when spacer is fully scrolled
+          scrub: 0.6
+        }
+      });
+
+      /* Reveal Leonardo and Rosario */
+      heroTl.to(".name", {
+        opacity: 1,
+        y: 0,
+        duration: 0.4,
+        ease: "power2.out"
+      }, 0.15);
+
+      /* Fade scroll prompt */
+      heroTl.to(".scroll-prompt", {
+        opacity: 0,
+        duration: 0.2
+      }, 0);
+
+      /* Zoom-out and reveal soft gradient mask */
+      heroTl.to(".hero-image-wrapper", {
+        "--mask-stop-1": "0%",
+        "--mask-stop-2": "0%",
+        "--mask-stop-3": "100%",
+        "--mask-stop-4": "100%",
+        ease: "none",
+        duration: 0.7
+      }, 0.1);
+
+      heroTl.to(silhouette, {
+        scale: 1,
+        ease: "none",
+        duration: 0.7
+      }, 0.1);
+
+      /* Orchestra Director */
+      heroTl.fromTo(".subtitle.conductor", {
+        opacity: 0, x: -30, y: -30
+      }, {
+        opacity: 1, x: 0, y: 0, duration: 0.6, ease: "power2.out"
+      }, 0.35);
+
+      /* Violinist */
+      heroTl.fromTo(".subtitle.violinist", {
+        opacity: 0, x: 30, y: 30
+      }, {
+        opacity: 1, x: 0, y: 0, duration: 0.6, ease: "power2.out"
+      }, 0.35);
+
+      /* Fade out hero at the end of the scroll spacer */
+      heroTl.to(".hero-content, .hero-image-wrapper", {
+        opacity: 0,
+        duration: 0.15,
+        ease: "power1.inOut"
+      }, 0.85); // Triggers at 85% of the spacer, making a smooth transition
+
+      // 2. BIOGRAPHY TEXT REVEAL (Scroll Animation)
+      gsap.fromTo(".background-text", 
+        { autoAlpha: 0, scale: 0.9 }, 
+        { 
+          autoAlpha: 1, 
+          scale: 1, 
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".new-bio-section",
+            start: "top 70%",
+            end: "top 30%",
+            scrub: true
+          }
+        }
+      );
+
+      // 3. NEW BIO CARDS TIMELINE
+      const wrappers = document.querySelectorAll('.card-wrapper');
+      const triggers = document.querySelectorAll('.step-trigger');
+      const cardsColumn = document.querySelector('.cards-column');
+
+      const calculateYCenter = (wrapper) => {
+        return wrapper.offsetTop + (wrapper.offsetHeight / 2);
+      };
+
+      wrappers.forEach((wrapper, index) => {
+        wrapper.style.zIndex = index + 1;
+      });
+
+      // Initial center
+      if (wrappers.length > 0) {
+        gsap.set(cardsColumn, { xPercent: -50, y: -calculateYCenter(wrappers[0]) });
+      }
+
+      triggers.forEach((trigger, index) => {
+        const wrapper = wrappers[index];
+        const card = wrapper.querySelector('.card');
+
+        const targetRot = parseFloat(card.getAttribute('data-rot'));
+        const targetX = parseFloat(card.getAttribute('data-x'));
+
+        gsap.set(card, {
+          y: -window.innerHeight * 1.5,
+          x: 0,
+          autoAlpha: 0,
+          rotation: targetRot > 0 ? targetRot + 15 : targetRot - 15
+        });
+
+        ScrollTrigger.create({
+          trigger: trigger,
+          start: "top 60%",
+          onEnter: () => {
+            gsap.to(card, {
+              y: 0, x: targetX, autoAlpha: 1, rotation: targetRot,
+              duration: 1.4, ease: "power3.out", overwrite: "auto"
+            });
+            gsap.to(cardsColumn, {
+              y: -calculateYCenter(wrapper),
+              duration: 1.4, ease: "power3.inOut", overwrite: "auto"
+            });
+          },
+          onLeaveBack: () => {
+            gsap.to(card, {
+              y: -window.innerHeight * 1.5, autoAlpha: 0,
+              rotation: targetRot > 0 ? targetRot + 15 : targetRot - 15,
+              duration: 1.0, ease: "power2.in", overwrite: "auto"
+            });
+            const targetIndex = index > 0 ? index - 1 : 0;
+            gsap.to(cardsColumn, {
+              y: -calculateYCenter(wrappers[targetIndex]),
+              duration: 1.4, ease: "power3.inOut", overwrite: "auto"
+            });
+          }
+        });
+      });
+
+      // 4. CINEMATIC FADE TO BLACK AND GALLERY REVEAL
+      gsap.to("body", {
+        backgroundColor: "#080808",
+        color: "#ffffff",
+        scrollTrigger: {
+          trigger: ".cinematic-fade-trigger",
+          start: "top 60%",
+          end: "bottom 20%",
+          scrub: true
+        }
+      });
+      gsap.to(".bg-vignette, .bg-grain", {
+        opacity: 1,
+        scrollTrigger: {
+          trigger: ".cinematic-fade-trigger",
+          start: "top 60%",
+          end: "bottom 20%",
+          scrub: true
+        }
+      });
+      // Optionally pin the gallery stage so it feels like a native section
+      // But user just wanted smooth scroll, so no pin unless required.
+
+      // 5. GALLERY CAROUSEL LOGIC
+      // MODAL LOGIC WITH TIMESTAMP SUPPORT
 const modal = document.getElementById('video-modal');
 const iframe = document.getElementById('video-frame');
 const closeBtn = document.querySelector('.video-close');
@@ -237,14 +496,16 @@ modal.addEventListener('click', e => {
   }
 });
 
+
 document.addEventListener('keydown', e => {
   if (e.key === "Escape") {
     modal.classList.remove('open');
     iframe.src = "";
   }
 });
-</script>
 
-
+    });
+  </script>
 </body>
 </html>
+
